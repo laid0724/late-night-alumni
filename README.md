@@ -2,7 +2,7 @@
 
 ![App Preview](preview.png)
 
-[Demo](https://pet-dating-app.herokuapp.com)
+[Demo](https://late-night-alumni-concept.herokuapp.com/)
 
 One of my earliest web-design projects when I first learned front-end. Design-focused. Code is a mess.
 
