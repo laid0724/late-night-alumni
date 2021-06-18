@@ -1,0 +1,1360 @@
+@import "stroke.scss";
+
+$black: #0B0305;
+$blackTransparent: rgba(11, 3, 5, 0.5);
+$blackTransparentHeavy: rgba(11, 3, 5, 0.9);
+$darkGrey: #595858;
+$lightGrey: #A5A5A5;
+$white: #F4F4F4;
+$whiteTransparent: rgba(244, 244, 244, 0.5);
+$whiteTransparentHeavy: rgba(244, 244, 244, 0.9);
+$colorSecondary: #BF9862;
+$colorPrimary: #BC3445;
+
+@mixin fullScreenCentered($z-index) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: $z-index;
+}
+
+@mixin flexCentered($z-index) {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: $z-index;
+}
+
+@mixin googleFontsMontserrat($font-size: 1rem) {
+    font-family: 'Montserrat', sans-serif;
+    font-size: $font-size;
+}
+
+@mixin googleFontsPoppins($font-size: 1rem) {
+    font-family: 'Poppins', sans-serif;
+    font-size: $font-size;
+}
+
+@mixin googleFontsCedarville($font-size: 1rem) {
+    font-family: 'Cedarville Cursive', cursive;
+    font-size: $font-size;
+}
+
+// debugger: 
+// * { outline: 1px solid red; }
+
+//reset: 
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style: none;
+}
+
+* {
+    user-select: none;
+}
+
+//settings to override fullpage.js css:
+
+.fp-controlArrow.fp-next {
+    //horizontal slide - right arrow
+    right: 50px;
+
+    &:hover {
+        border-color: transparent transparent transparent $colorPrimary;
+    }
+}
+
+.fp-controlArrow.fp-prev {
+    //horizontal slide - left arrow
+    left: 50px;
+
+    &:hover {
+        border-color: transparent $colorPrimary transparent transparent;
+    }
+}
+
+.fp-slidesNav.fp-bottom {
+    //horizontal slide - bottom pagination dots
+    text-align: center;
+    a span {
+        background: $white;
+
+        &:hover {
+            background: $colorPrimary;
+        }
+    }
+}
+
+#fp-nav {
+
+    //vertical page scrolling pagination
+    ul {
+        li {
+            a {
+                span {
+                    background: $white;
+                    &:hover {
+                        background: $colorPrimary;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//nav bar css: 
+.menuBarBgColored {
+    background: $black;
+}
+
+#header {
+    position: fixed;
+    z-index: 999;
+    padding: 0;
+    transition: 1s;
+    background: transparent;
+    nav {
+        background: transparent;
+        position: fixed;
+        z-index: 999;
+        ul {
+            display: flex;
+            height: 10vh;
+            flex-direction: row;
+            justify-content: space-between;
+
+            a {
+                margin-top: 22px;
+                margin-left: 22px;
+
+                li.navLogo {
+                    width: 36%;
+                    min-width: 125px;
+                    // padding-bottom: 56.25%; /* 16:9 */
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+
+                        &:hover {
+                            color: tint
+                        }
+                    }
+                }
+            }
+
+            // hamburger menu css: 
+            li.hamburgerMenuIcon {
+                .ham {
+                    cursor: pointer;
+                    -webkit-tap-highlight-color: transparent;
+                    transition: transform 400ms;
+                    -moz-user-select: none;
+                    -webkit-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+
+                    &:hover {
+                        .line,
+                        .ham3,
+                        .top,
+                        .middle,
+                        .bottom {
+                            stroke: $colorPrimary;
+                        }
+                    }
+
+                }
+
+                .line {
+                    fill: none;
+                    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+                    //color of hamburger
+                    stroke: $white;
+                    stroke-width: 5.5;
+                    stroke-linecap: round;
+
+                }
+
+                .ham3 {
+                    .top {
+                        stroke-dasharray: 40 130;
+                    }
+
+                    .middle {
+                        stroke-dasharray: 40 140;
+                    }
+
+                    .bottom {
+                        stroke-dasharray: 40 205;
+                    }
+
+                    &.active {
+                        .top {
+                            stroke-dasharray: 75 130;
+                            stroke-dashoffset: -63px;
+                        }
+
+                        .middle {
+                            stroke-dashoffset: -102px;
+                        }
+
+                        .bottom {
+                            stroke-dasharray: 110 205;
+                            stroke-dashoffset: -86px;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    //expanded menu page css
+    #expandedMenu {
+        display: none;
+        z-index: 998; // -1 from navbar so logo and hamburger icon can still be clicked
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+
+        //menu anchor css
+        .sectionAnchorsWrapper {
+            @include flexCentered(999);
+            position: absolute;
+            a {
+                text-decoration: none;
+                color: $white;
+                @include stroke(2, $black);
+                transition: .5s;
+                
+                &:hover {
+                    color: $colorPrimary;
+                }
+                &:active {
+                    filter: blur(2px);
+                }
+                &.active {
+                    color: $colorPrimary;
+                    h1 {
+                        font-size: calc(20px + 3vw);
+                    }
+                }
+                h1 {
+                    @include googleFontsMontserrat(calc(20px + 2vw));
+                    line-height: calc(20px + 4vw);
+                    font-weight: 700;
+                }
+            }
+        }
+
+        //css for menu blob SVGs
+        @keyframes from0to360 {
+            from {
+                transform: rotate(0);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes from360to0 {
+            from {
+                transform: rotate(360deg);
+            }
+
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        .svgWrapper {
+            position: relative;
+            #blobImage {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+                #blobBg {
+                    transition: 0.5s;
+                }
+                #circle1 {
+                    animation: from0to360 3s linear infinite;
+                    cx: 50%;
+                    cy: 48%;
+                    r: 30%;
+                    transform-origin: 48% 50%;
+                }
+
+                #circle2 {
+                    animation: from360to0 4s linear infinite;
+                    cx: 50%;
+                    cy: 52%;
+                    r: 30%;
+                    transform-origin: 52% 50%;
+                }
+
+                #circle3 {
+                    animation: from0to360 5s linear infinite;
+                    cx: 48%;
+                    cy: 50%;
+                    r: 30%;
+                    transform-origin: 50% 48%;
+                }
+
+                #circle4 {
+                    animation: from360to0 4.5s linear infinite;
+                    cx: 52%;
+                    cy: 50%;
+                    r: 30%;
+                    transform-origin: 50% 52%;
+                }
+            }
+        }
+    }
+}
+
+
+
+// gearPlayer CSS
+iframe#gearPlayer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+}
+
+// Page 1: Landing Page CSS
+#landingPage {
+    height: 100vh;
+    position: relative;
+    background: $black;
+    overflow: hidden;
+
+    video#bgVideo {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%; 
+        min-height: 100%;
+    }
+
+    .patternBg {
+        @include fullScreenCentered(2);
+        background: $blackTransparent;
+    }
+
+    .avatar {
+        @include fullScreenCentered(3);
+        display: flex;
+        justify-content: center;
+
+        img {
+            width: 50%;
+            height: 50%;
+            @media screen and (max-width: 451px) {
+                width: 75%;
+                height: 75%;
+            }
+        }
+    }
+
+    .cursiveHeadline {
+        @include fullScreenCentered(4);
+        display: flex;
+        justify-content: center;
+
+        img {
+            width: 50%;
+            height: 50%;
+            @media screen and (max-width: 451px) {
+                width: 75%;
+                height: 75%;
+            }
+        }
+
+        // h1 {
+        //     @include googleFontsCedarville(calc(15px + 5vw));
+        //     @include stroke(1, $black);
+        //     color: $white;
+        // }
+    }
+}
+
+// Page 2: biography CSS
+#biography {
+    height: 100vh;
+    background: $white;
+
+    //scrollbar appearance settings
+    ::-webkit-scrollbar,
+    ::-webkit-scrollbar-track,
+    ::-webkit-scrollbar-thumb {
+        width: 7px;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0); 
+    }
+     
+    ::-webkit-scrollbar-thumb {
+        background: rgba(11, 3, 5, 0);
+    }
+    
+    .container-fluid {
+        height: 100vh; //make page scroll-able if set over 100
+        @media screen and (max-width: 576px) {
+            height: 2000px; 
+        }
+    }
+    .row {
+        display: flex;
+        .bgAvatar {
+            height: 100vh;
+            position: relative;
+            @media screen and (max-width: 576px) {
+                display: none;
+            }
+            .cursiveHeadline {
+                position: absolute;
+                top: 7vh;
+                left: 5vw;
+                z-index: 1;
+                height: 40vh;
+                width: 40vw;
+                padding: 30px 0;
+
+                h1 {
+                    @include googleFontsCedarville(calc(20px + 8vw));
+                    @include stroke(1, $white);
+                    color: $black;
+                    margin-left: 1vw;
+                }
+
+            }
+            figure {
+                position: absolute;
+                bottom: 0;
+                margin: 0;
+                width: 80%;
+
+                .aspectRatioWrapper {
+                    width: 100%;
+                    padding-top: 100%;
+                    position: relative;
+
+                    img {
+                        width: 100%;
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                    }
+                }
+            }
+        }
+
+        .textBox {
+            height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            @media screen and (max-width: 576px) {
+                display: block;
+            }
+            &:hover {
+                ::-webkit-scrollbar-track {
+                    background: $white; 
+                }
+                ::-webkit-scrollbar-thumb {
+                    background: $black;
+                }
+            }
+            .bioText {
+                margin: 5vh 23px 5vh 0;
+                padding-right: 3vw;
+                height: 80vh;
+                width: 50vw;
+                overflow-y: auto;
+                position: relative;
+                //mobile settings
+                @media screen and (max-width: 576px) {
+                    margin: 0 auto;
+                    margin-top: 15vh;
+                    padding-right: 0;
+                    width: 80vw;
+                    height: auto;
+                    overflow: unset;
+                }
+                .bgAvatarMobile {
+                    .cursiveHeadline {
+                        margin-bottom: 10vw;
+                        h1 {
+                            @include googleFontsCedarville(calc(20px + 10vw));
+                            @include stroke(1, $white);
+                            color: $black;
+                            text-align: center;
+                        }
+        
+                    }
+                }
+                @media screen and (min-width: 576px) {
+                    .bgAvatarMobile {
+                        display: none;
+                    }
+                }
+                p {
+                    @include googleFontsMontserrat(calc(2px + 1vw));
+                    font-weight: 400;
+                    line-height: calc(2px + 1.5vw);
+                    text-indent: calc(2px + 3vw);
+                    margin-bottom: 1.5vw;
+                    b {
+                        font-weight: 900;
+                    }
+                    @media screen and (max-width: 576px) {
+                        @include googleFontsMontserrat(calc(12px + 1vw));
+                        font-weight: 400;
+                        line-height: calc(12px + 2vw);
+                        text-indent: calc(12px + 5vw);
+                        margin-bottom: 5vw;
+                    }
+
+                }
+            }
+
+        }
+    }
+}
+
+// page3 music player/discography CSS
+#musicPlayer {
+    height: 100vh;
+    @media screen and (max-width: 576px) {
+        .fp-controlArrow.fp-next {
+            //horizontal slide - right arrow
+            right: 50px;
+        }
+        
+        .fp-controlArrow.fp-prev {
+            //horizontal slide - left arrow
+            left: 50px;
+        }
+    }
+    .sliderWrapper {
+        position: relative;
+
+        .cursiveHeadline {
+            @include fullScreenCentered(999);
+            top: 10vh;
+            text-align: center;
+            @media screen and (max-width: 576px) {
+                top: 20vh;
+            }
+
+            h1 {
+                @include googleFontsCedarville(calc(20px + 4vw));
+                @include stroke(1, $blackTransparent);
+                color: $white;
+                @media screen and (max-width: 576px) {
+                    @include stroke(0, null);
+                }
+            }
+        }
+    }
+
+    //universal settings for all discography album slides
+    .slide1,
+    .slide2,
+    .slide3,
+    .slide4,
+    .slide5,
+    .slide6,
+    .slide7,
+    .slide8 {
+        .row {
+            .left-column {
+                background-position: center;
+                background-size: cover;
+                background-repeat: no-repeat;
+                padding: 0;
+                @media screen and (max-width: 576px) {
+                    display: none;
+                }
+                .colorTintBg {
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    .tableWrap {
+                        // height: 60%;
+                        width: 60%;
+
+                        table {
+                            height: 100%;
+                            width: 100%;
+                            border-collapse: collapse;
+                            border-radius: 10px;
+                            background: $whiteTransparent;
+                            @include googleFontsPoppins(calc(10px + 0.5vw));
+
+                            tr {
+                                &:hover {
+                                    background: $blackTransparentHeavy;
+
+                                    td,
+                                    i {
+                                        color: $white;
+                                    }
+
+                                    i {
+                                        &:hover {
+                                            color: $colorPrimary;
+                                        }
+                                    }
+                                }
+
+                                &:last-child {
+                                    &:hover {
+                                        td {
+                                            &:first-child {
+                                                border-bottom-left-radius: 10px;
+                                            }
+
+                                            &:last-child {
+                                                border-bottom-right-radius: 10px;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                th {
+                                    text-align: center;
+                                    background: $black;
+                                    color: $white;
+                                    border-top-left-radius: 10px;
+                                    border-top-right-radius: 10px;
+                                }
+
+                                td {
+                                    color: $black;
+
+                                    span {
+                                        margin: 0 10px;
+                                    }
+
+                                    a {
+                                        color: $black;
+
+                                        &:hover {
+                                            color: $colorPrimary;
+                                        }
+
+                                        i {
+                                            margin: 0 5px;
+                                            font-size: calc(10px + 1vw);
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+                }
+            }
+
+            .right-column {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                h2 {
+                    @include googleFontsMontserrat(2.5vw);
+                    color: $white;
+                    font-weight: 500;
+                    @media screen and (max-width: 576px){
+                        font-size: 4vw;
+                    }
+                }
+
+                figure.albumCover {
+                    width: 50%;
+                    margin: 8px auto;
+
+                    .aspectRatioWrapper {
+                        width: 100%;
+                        padding-bottom: 95%;
+                        /* roughly 50:50 ratio*/
+                        position: relative;
+                        // border: 10px solid $colorPrimary; //see css lera verou to fix this issue
+                        border-radius: 10px;
+                        display: block;
+
+                        img {
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            text-align: center;
+                            width: 100%;
+                            height: 100%;
+                            display: block;
+                            z-index: 1;
+                            border-radius: 10px;
+                        }
+
+                        .previewTint {
+                            position: absolute;
+                            top: 0;
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            text-align: center;
+                            width: 100%;
+                            height: 100%;
+                            display: block;
+                            z-index: 2;
+                            background: transparent;
+                            border-radius: 10px;
+                            transition: 0.75s;
+
+                            i {
+                                @include fullScreenCentered(3);
+                                font-size: 50px;
+                                color: transparent;
+                                filter: blur(100px);
+                                transition: 0.75s;
+                            }
+
+                            &:hover {
+                                background: $blackTransparent;
+                                cursor: pointer;
+
+                                i {
+                                    color: $white;
+                                    filter: blur(0);
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+    // settings for slide 1 - the ghost ep
+    .slide1 {
+        .row {
+            .left-column {
+                background-image: url(../images/left-col-bg-img-1.jpg);
+                background-color: #000;
+
+                .tableWrap {
+                    height: 60%;
+                }
+            }
+
+            .right-column {
+                background: #000;
+            }
+        }
+    }
+
+    // settings for slide 2 - startled heart ep
+    .slide2 {
+        .row {
+            .left-column {
+                background-image: url(../images/left-col-bg-img-2.jpg);
+                background-color: $black;
+
+                .tableWrap {
+                    height: 35%;
+                }
+            }
+
+            .right-column {
+                background: $black;
+            }
+        }
+    }
+
+    // settings for slide 3 - love song ep
+    .slide3 {
+        .row {
+            .left-column {
+                background-image: url(../images/left-col-bg-img-3.jpg);
+                background-color: #e39fac;
+
+                .tableWrap {
+                    height: 25%;
+                }
+            }
+
+            .right-column {
+                background: #e39fac;
+            }
+        }
+    }
+
+    // settings for slide 4 - eclipse
+    .slide4 {
+        .row {
+            .left-column {
+                background-image: url(../images/left-col-bg-img-4.jpg);
+                background-color: $colorSecondary;
+
+                .tableWrap {
+                    height: 70%;
+                }
+            }
+
+            .right-column {
+                background: $colorSecondary;
+            }
+        }
+    }
+
+    // settings for slide 5 - the beat becomes a sound
+    .slide5 {
+        .row {
+            .left-column {
+                background-image: url(../images/left-col-bg-img-5.jpg);
+                background-color: $colorPrimary;
+
+                .tableWrap {
+                    height: 70%;
+                }
+            }
+
+            .right-column {
+                background: $colorPrimary;
+            }
+        }
+    }
+
+    // settings for slide 6 - haunted
+    .slide6 {
+        .row {
+            .left-column {
+                background-image: url(../images/left-col-bg-img-6.jpg);
+                background-color: $lightGrey;
+
+                .tableWrap {
+                    height: 70%;
+                }
+            }
+
+            .right-column {
+                background: $lightGrey;
+
+                h2 {
+                    color: $white;
+                }
+            }
+        }
+    }
+
+    // settings for slide 7 - of birds bees butterflies etc
+    .slide7 {
+        .row {
+            .left-column {
+                background-image: url(../images/left-col-bg-img-7.jpg);
+                background-color: $colorSecondary;
+
+                .tableWrap {
+                    height: 70%;
+                }
+            }
+
+            .right-column {
+                background: $colorSecondary;
+            }
+        }
+    }
+
+    // settings for slide 8 - empty streets
+    .slide8 {
+        .row {
+            .left-column {
+                background-image: url(../images/left-col-bg-img-8.jpg);
+                background-color: $colorSecondary;
+
+                .tableWrap {
+                    height: 70%;
+                }
+            }
+
+            .right-column {
+                background: $colorSecondary;
+            }
+        }
+    }
+}
+
+//page 4 journal entries
+#journal {
+    background: $black;
+    height: 100vh;
+    width: 100vw;
+
+    //journal landing page with blob effects: .slide1#journalLanding
+    #journalLanding {
+        .fp-tableCell {
+            //this class layer is dynamically created by fullpage.js
+            position: relative;
+
+            h1#journalPageTrigger {
+                @include fullScreenCentered(999);
+                @include googleFontsCedarville(calc(20px + 10vw));
+                text-align: center;
+                width: auto;
+                color: $white;
+                @include stroke(2, $black);
+
+                &:hover {
+                    color: $colorPrimary;
+                    cursor: pointer;
+                }
+            }
+
+            .bgImage {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 100vw;
+                height: 100vh;
+                background-image: url(../images/journal_bg.jpg);
+                background-size: cover;
+                background-position: center;
+                -webkit-filter: grayscale(100%) blur(10px);
+                filter: grayscale(100%) blur(10px);
+                z-index: -1;
+            }
+
+            .blobCont {
+                padding: 0; //IMPORTANT! the padding was fucking up the blob's positioning.
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                width: 100vw;
+                height: 100vh;
+            }
+
+            //animation that makes the blob moves: 
+            @for $i from 1 through 18 {
+                $a : #{$i*90};
+                $b : #{$i*90+360};
+
+                .blob:nth-child(#{$i}) {
+                    animation: move#{$i} 20s infinite linear;
+                }
+
+                @keyframes move#{$i} {
+                    from {
+                        transform:rotate(#{$a}deg) translate(200px, 0.1px) rotate(-#{$a}deg);
+                    }
+
+                    to {
+                        transform:rotate(#{$b}deg) translate(200px, 0.1px) rotate(-#{$b}deg);
+                    }
+                }
+
+            }
+        }
+    }
+
+    //scroll overflow page: .slide2#journalEntries
+    #journalEntries {
+        background-image: url(../images/journal_bg_greyblur.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        overflow: auto; //dynamic height
+        
+        .container {
+            background-color: transparent;
+            margin: 15vh auto;
+            //masonry grid for individual journal entries
+            .grid {
+                .grid-item {
+                    background: $white;
+                    border-radius: 10px;
+                }
+                .grid-sizer,
+                .grid-item {
+                    width: 30%;
+                    margin: 1.5%;
+                    
+                    @media screen and (max-width: 650px){
+                        width: 38%;
+                        margin: 5% 0;
+                        margin-left: 10%;
+                        margin-right: 2%;
+
+                    }
+                    .imgWrap {
+                        figure {
+                            width: 100%;
+                            margin: auto;
+                            .aspectRatioWrapper {
+                                width: 100%;
+                                padding-bottom: 56.25%; /* 16:9 */
+                                position: relative;
+                                background: black;
+                                display: block;
+                                border-top-left-radius: 10px;
+                                border-top-right-radius: 10px;
+                                img {
+                                    position: absolute;
+                                    border-top-left-radius: 10px;
+                                    border-top-right-radius: 10px;
+                                    width: 100%;
+                                    height: 100%;
+                                    top: 0; bottom: 0; left: 0; right: 0;
+                                    display: block;
+                                }
+                            } 
+                        }
+                    }
+                    .contentWrap {
+                        margin: 20px;
+                        padding-bottom: 20px;
+                        overflow: auto; //dynamic height
+                        .entryDate {
+                            i {
+                                font-size: calc(12px + 0.5vw);
+                                color: $lightGrey;
+                                span {
+                                    @include googleFontsMontserrat(calc(12px + 0.5vw));
+                                    margin-left: 10px;
+                                }
+                            }
+                        }
+                        .entryTitle {
+                            @include googleFontsMontserrat(calc(16px + 0.5vw));
+                            color: $black;
+                        }
+                        .entryBody {
+                            @include googleFontsPoppins(calc(8px + 0.5vw));
+                            color: $darkGrey;
+                        }
+                        .customUnderScore {
+                            position: relative;
+                            // z-index: 1;
+                            
+                            ::before {
+                                content: "";
+                                position: absolute;
+                                left: 0; 
+                                bottom: -10px;
+                                width: 100%;
+                                border-bottom: 0.5vw solid $black;  
+                            }
+                            
+                            a.entryReadMore {
+                                @include googleFontsMontserrat(calc(10px + 0.5vw));
+                                font-weight: 700;
+                                color: $black;
+                                text-decoration-line: none;
+                                position: relative;
+                                cursor: pointer;
+                                
+                                &:hover {
+                                    color: $colorPrimary;
+                                }
+                            }
+                        }
+                        
+                    }
+                }
+                .grid-item--full-width {
+                    width: 100%;
+                    margin: 1.5% 0;
+                    @media screen and (max-width: 650px){
+                        width: 80%;
+                        margin: 5% 10%;
+                    }
+                }
+                .grid-item--sixty-width {
+                    width: 60%;
+                    margin: 1.5% 3%;
+                    @media screen and (max-width: 650px){
+                        width: 38%;
+                        margin: 5% 0;
+                        margin-right: 10%;
+                        margin-left: 2%;
+                    }
+                }
+
+                .entry1 {
+                    .imgWrap {
+                        figure {
+                            .aspectRatioWrapper {
+                                padding-bottom: 37%; /* 851:315 */
+                            }
+                        }
+                    }
+                }
+                .entry2 {
+                    .imgWrap {
+                        figure {
+                            .aspectRatioWrapper {
+                                padding-bottom: 53.37%; /* 2048:1193 */
+                            }
+                        }
+                    }
+                }
+                .entry3 {
+                    .imgWrap {
+                        figure {
+                            .aspectRatioWrapper {
+                                padding-bottom: 88%; /* 892:785 */
+                            }
+                        }
+                    }
+                }
+
+                .entry4 {
+                    .imgWrap {
+                        figure {
+                            .aspectRatioWrapper {
+                                padding-bottom: 56.25%; /* 16:9 */
+                            }
+                        }
+                    }
+                }
+                .entry5 {
+                    .imgWrap {
+                        figure {
+                            .aspectRatioWrapper {
+                                padding-bottom: 38.18%; /* 55:21 */
+                            }
+                        }
+                    }
+                }
+                .entry6 {
+                    .imgWrap {
+                        figure {
+                            .aspectRatioWrapper {
+                                padding-bottom: 71.77%; /* 960:689 */
+                            }
+                        }
+                    }
+                }
+                .entry7 {
+                    .imgWrap {
+                        figure {
+                            .aspectRatioWrapper {
+                                padding-bottom: 75%; /* 4:3 */
+                            }
+                        }
+                    }
+                }
+                .entry8 {
+                    .imgWrap {
+                        figure {
+                            .aspectRatioWrapper {
+                                padding-bottom: 37%; /* 851:315 */
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+}
+
+//iframe for the articles lightbox
+iframe.articles {
+    z-index: 1000;
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0; bottom: 0; left: 0; right: 0;
+}
+
+//page 5: contact us 
+#contactUs {
+    height: 100vh;
+    width: 100vw;
+    background-image: url(../images/contact-us-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    .fp-tableCell { //dynamically created layer by fullpage.js
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .container {
+            height: calc(80vh + 5vmax);
+            max-height: 700px;
+            width: 75vw;
+            background: $blackTransparentHeavy;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            @media screen and (max-width: 576px) {
+                height: 80vh;
+            }
+            .cursiveHeadline {
+                margin: 5vh 0;
+                @media screen and (max-width: 576px) {
+                    margin: 2vh 0;
+                }
+                h1 {
+                    @include googleFontsMontserrat(calc(20px + 4vw));
+                    color: $white;
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+            .formWrap {
+                width: 100%;
+                height: 100%;
+                .leftColumnPC {
+                    display: flex;
+                    flex-direction: column;
+                    // justify-content: center;
+                    align-items: center;
+                    padding-bottom: 10vh;
+                    p {
+                        @include googleFontsPoppins(calc(10px + 0.5vw));
+                        color: $white;
+                        text-align: center;
+                        font-weight: 200;
+                        line-height: calc(20px + 0.5vw);
+                        b {
+                            font-weight: 700; 
+                        }
+                        a {
+                            color: $white;
+                            font-weight: 700;
+                            &:hover {
+                                color: $colorPrimary;
+                            }
+                        }
+                    }
+                    //mobile settings
+                    @media screen and (max-width: 576px) {
+                        display: none;
+                    }
+                }
+                .leftColumnMobile {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding-bottom: 0;
+                    p {
+                        @include googleFontsPoppins(calc(10px + 0.5vw));
+                        color: $white;
+                        text-align: center;
+                        font-weight: 200;
+                        line-height: calc(20px + 0.5vw);
+                        b {
+                            font-weight: 700; 
+                        }
+                        a {
+                            color: $white;
+                            font-weight: 700;
+                            &:hover {
+                                color: $colorPrimary;
+                            }
+                        }
+                    }
+                    //desktop settings
+                    @media screen and (min-width: 576px) {
+                        display: none;
+                    }
+                }
+                .rightColumn {
+                    #contactForm {
+                        .buttons {
+                            .buttonColumn{
+                                padding: 0;
+                                display: flex;
+                                justify-content: flex-end;
+                                button {
+                                    margin-left: 1vw;
+                                }
+                            } 
+                            
+                        }
+                        label,
+                        button {
+                            @include googleFontsPoppins(calc(8px + 0.5vw));
+                            color: $white;
+                        }
+                        small {
+                            display: none;
+                        }
+
+                        input,
+                        textarea,
+                        select {
+                            @include googleFontsPoppins(calc(8px + 0.5vw));
+                            background-color: $whiteTransparent;
+                            color: $black;
+                            border-radius: 10px;
+                            border: 1px solid $darkGrey;
+                            resize: none;
+                            &:focus {
+                                border: 1px solid $colorPrimary;
+                                outline: 0;
+                                box-shadow: 0 0 0 0.2rem rgba(188, 52, 69, .5);
+                            }
+                        }
+
+                        button {
+                            background: $black;
+                            &:hover {
+                                background: $colorPrimary;
+                            }
+                            &:active,
+                            &:focus {
+                                border: 1px solid $colorPrimary;
+                                outline: 0;
+                                box-shadow: 0 0 0 0.2rem rgba(188, 52, 69, .5);
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+    }
+    
+    
+}

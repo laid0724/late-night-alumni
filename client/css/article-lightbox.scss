@@ -1,0 +1,255 @@
+@import "main.scss";
+
+html,
+body {
+    background: transparent;
+}
+
+.container {
+    width: 80vw;
+}
+
+// pop up articles when read more is clicked
+.overlay {
+    // display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: $blackTransparentHeavy;
+}
+
+.lightbox {
+    margin-top: 10vh;
+    position: relative;
+    height: 80vh;
+
+    //scrollbar appearance settings
+    ::-webkit-scrollbar,
+    ::-webkit-scrollbar-track,
+    ::-webkit-scrollbar-thumb {
+        width: 10px;
+        border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0);
+        border-left: 1px solid $white;
+        border-right: 1px solid $white;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(11, 3, 5, 0);
+        border-left: 1px solid $white;
+        border-right: 1px solid $white;
+    }
+
+    @media screen and (max-width: 451px) {
+        ::-webkit-scrollbar,
+        ::-webkit-scrollbar-track,
+        ::-webkit-scrollbar-thumb {
+            width: 0;
+    }
+    }
+
+    &:hover {
+        ::-webkit-scrollbar-track {
+            background: $white;
+            border-left: 1px solid $white;
+            border-right: 1px solid $white;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: $black;
+            border-left: 1px solid $white;
+            border-right: 1px solid $white;
+        }
+    }
+
+    //general settings for all article lightbox
+    .article {
+        @include fullScreenCentered(1000);
+        background: $white;
+        width: 100%;
+        overflow-y: auto; //dynamic height
+        height: 100%;
+
+        .imgWrap {
+            position: relative;
+
+            figure {
+                width: 100%;
+                margin: auto;
+
+                .aspectRatioWrapper {
+                    width: 100%;
+                    padding-bottom: 56.25%;
+                    /* 16:9 */
+                    position: relative;
+                    display: block;
+
+                    img {
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .contentWrap {
+            padding: 0 5vw 5vw 5vw;
+
+            .entryDate {
+                margin: 1vw 0;
+
+                i {
+                    font-size: calc(12px + 0.5vw);
+                    color: $lightGrey;
+
+                    span {
+                        @include googleFontsMontserrat(calc(12px + 0.5vw));
+                        margin-left: 10px;
+                    }
+                }
+            }
+
+            .entryTitle {
+                margin: 1vw 0;
+                @include googleFontsMontserrat(calc(16px + 0.5vw));
+                color: $black;
+            }
+
+            .entryBody {
+                margin: 1vw 0;
+                @include googleFontsPoppins(calc(12px + 0.5vw));
+                line-height: calc(16px + 0.5vw);
+                text-indent: calc(16px + 3vw);
+                color: $darkGrey;
+            }
+
+            .customUnderScore {
+                position: relative;
+                // z-index: 1;
+
+                ::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: -10px;
+                    width: 100%;
+                    border-bottom: 0.5vw solid $black;
+                }
+
+                a.entryKillBtn {
+                    @include googleFontsMontserrat(calc(16px + 0.5vw));
+                    font-weight: 700;
+                    color: $black;
+                    text-decoration-line: none;
+                    position: relative;
+                    cursor: pointer;
+
+                    &:hover {
+                        color: $colorPrimary;
+                    }
+                }
+            }
+        }
+    }
+
+    //settings for individual articles: 
+    .article1 {
+        .imgWrap {
+            figure {
+                .aspectRatioWrapper {
+                    padding-bottom: 37%;
+                    /* 851:315 */
+                }
+            }
+        }
+    }
+
+    .article2 {
+        .imgWrap {
+            figure {
+                .aspectRatioWrapper {
+                    padding-bottom: 53.37%;
+                    /* 2048:1193 */
+                }
+            }
+        }
+    }
+
+    .article3 {
+        .imgWrap {
+            figure {
+                .aspectRatioWrapper {
+                    padding-bottom: 88%;
+                    /* 892:785 */
+                }
+            }
+        }
+    }
+
+    .article4 {
+        .imgWrap {
+            figure {
+                .aspectRatioWrapper {
+                    padding-bottom: 56.25%;
+                    /* 16:9 */
+                }
+            }
+        }
+    }
+
+    .article5 {
+        .imgWrap {
+            figure {
+                .aspectRatioWrapper {
+                    padding-bottom: 38.18%;
+                    /* 55:21 */
+                }
+            }
+        }
+    }
+
+    .article6 {
+        .imgWrap {
+            figure {
+                .aspectRatioWrapper {
+                    padding-bottom: 71.77%;
+                    /* 960:689 */
+                }
+            }
+        }
+    }
+
+    .article7 {
+        .imgWrap {
+            figure {
+                .aspectRatioWrapper {
+                    padding-bottom: 75%;
+                    /* 4:3 */
+                }
+            }
+        }
+    }
+
+    .article8 {
+        .imgWrap {
+            figure {
+                .aspectRatioWrapper {
+                    padding-bottom: 37%;
+                    /* 851:315 */
+                }
+            }
+        }
+    }
+
+}

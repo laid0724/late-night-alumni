@@ -1,0 +1,11 @@
+{
+  "albumCover":"img/thumbs/the-ghost-ep.jpg",
+  "albumTitle":"The Ghost (EP)",
+  "albumAuthor":"Late Night Alumni",
+  "soundcloudEnabled":true,
+  "soundcloudClientID":"LvWovRaJZlWCHql0bISuum8Bd2KX79mb",
+  "soundcloudSet":"https://soundcloud.com/latenightalumni/sets/the-ghost-ep",
+  "soundcloudOverwrite":true,
+  "autoPlay":true,
+  "shuffle":true
+}

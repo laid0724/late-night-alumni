@@ -1,0 +1,11 @@
+{
+  "albumCover":"img/thumbs/love-song.jpg",
+  "albumTitle":"Love Song",
+  "albumAuthor":"Late Night Alumni",
+  "soundcloudEnabled":true,
+  "soundcloudClientID":"LvWovRaJZlWCHql0bISuum8Bd2KX79mb",
+  "soundcloudSet":"https://soundcloud.com/latenightalumni/sets/late-night-alumni-love-song",
+  "soundcloudOverwrite":true,
+  "autoPlay":true,
+  "shuffle":true
+}

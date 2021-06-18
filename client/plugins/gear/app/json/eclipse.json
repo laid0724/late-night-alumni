@@ -1,0 +1,11 @@
+{
+  "albumCover":"img/thumbs/eclipse.jpg",
+  "albumTitle":"Eclipse",
+  "albumAuthor":"Late Night Alumni",
+  "soundcloudEnabled":true,
+  "soundcloudClientID":"LvWovRaJZlWCHql0bISuum8Bd2KX79mb",
+  "soundcloudSet":"https://soundcloud.com/latenightalumni/sets/late-night-alumni-eclipse-1",
+  "soundcloudOverwrite":true,
+  "autoPlay":true,
+  "shuffle":true
+}

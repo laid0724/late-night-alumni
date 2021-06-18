@@ -1,0 +1,11 @@
+{
+  "albumCover":"img/thumbs/startled-heart.jpg",
+  "albumTitle":"Startled Heart (EP)",
+  "albumAuthor":"Late Night Alumni",
+  "soundcloudEnabled":true,
+  "soundcloudClientID":"LvWovRaJZlWCHql0bISuum8Bd2KX79mb",
+  "soundcloudSet":"https://soundcloud.com/latenightalumni/sets/startledheart",
+  "soundcloudOverwrite":true,
+  "autoPlay":true,
+  "shuffle":true
+}
