@@ -1,5 +1,3 @@
-.vscode
 **/.DS_Store
 **/Thumbs.db
-server/bin/*
-server/obj/*
+firebase-debug.log
