@@ -515,19 +515,4 @@ $(document).ready(function () {
   $('h1#journalPageTrigger').on('click', function () {
     $('.fp-controlArrow.fp-next')[1].click();
   });
-
-  //individual journal settings/lightbox
-
-  $('a.entryReadMore').each(function () {
-    // this breaks the website, fix it later.
-    // $(this).click(function(){
-    //     var articleNumber = $(this).attr("data-article");
-    //     for(i = 0; i < 9; i++) {
-    //         if (i = articleNumber) {
-    //             $("iframe.articles").attr("src", `article${articleNumber}.html`);
-    //             $("iframe.articles").css("display", "block");
-    //         }
-    //     }
-    // })
-  });
 });
